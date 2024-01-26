@@ -63,8 +63,6 @@ function isCollidingWithMap(player) {
 function tick(delta) {
   for (const player of players) {
     const inputs = inputsMap[player.id];
-    const previousY = player.y;
-    const previousX = player.x;
 
     if (inputs.up) {
       player.y -= SPEED;
@@ -72,18 +70,10 @@ function tick(delta) {
       player.y += SPEED;
     }
 
-    if (isCollidingWithMap(player)) {
-      player.y = previousY;
-    }
-
     if (inputs.left) {
       player.x -= SPEED;
     } else if (inputs.right) {
       player.x += SPEED;
-    }
-
-    if (isCollidingWithMap(player)) {
-      player.x = previousX;
     }
   }
 
@@ -138,16 +128,6 @@ async function main() {
 
     socket.on("inputs", (inputs) => {
       inputsMap[socket.id] = inputs;
-    });
-
-    socket.on("mute", (isMuted) => {
-      const player = players.find((player) => player.id === socket.id);
-      player.isMuted = isMuted;
-    });
-
-    socket.on("voiceId", (voiceId) => {
-      const player = players.find((player) => player.id === socket.id);
-      player.voiceId = voiceId;
     });
 
     socket.on("snowball", (angle) => {

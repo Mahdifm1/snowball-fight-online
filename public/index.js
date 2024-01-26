@@ -18,7 +18,7 @@ const canvas = canvasEl.getContext("2d");
 
 const socket = io();
 
-const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
+// const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 
 const localTracks = {
   audioTrack: null,
@@ -56,12 +56,12 @@ const options = {
   token: null,
 };
 
-async function subscribe(user, mediaType) {
-  await client.subscribe(user, mediaType);
-  if (mediaType === "audio") {
-    user.audioTrack.play();
-  }
-}
+// async function subscribe(user, mediaType) {
+//   await client.subscribe(user, mediaType);
+//   if (mediaType === "audio") {
+//     user.audioTrack.play();
+//   }
+// }
 
 function handleUserPublished(user, mediaType) {
   const id = user.uid;
@@ -74,16 +74,16 @@ function handleUserUnpublished(user) {
   delete remoteUsers[id];
 }
 
-async function join() {
-
-  client.on("user-published", handleUserPublished);
-  client.on("user-unpublished", handleUserUnpublished);
-
-  await client.join(options.appid, options.channel, options.token || null, uid);
-  localTracks.audioTrack = await AgoraRTC.createMicrophoneAudioTrack();
-
-  await client.publish(Object.values(localTracks));
-}
+// async function join() {
+//
+//   client.on("user-published", handleUserPublished);
+//   client.on("user-unpublished", handleUserUnpublished);
+//
+//   await client.join(options.appid, options.channel, options.token || null, uid);
+//   localTracks.audioTrack = await AgoraRTC.createMicrophoneAudioTrack();
+//
+//   await client.publish(Object.values(localTracks));
+// }
 
 join();
 

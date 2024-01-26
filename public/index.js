@@ -26,6 +26,7 @@ const localTracks = {
 
 const chatInput = document.getElementById('chat-input');
 const sendChatButton = document.getElementById('send-chat-button');
+const chatBoxElement = document.getElementById('chat-box');
 
 sendChatButton.addEventListener('click', () => {
   const message = chatInput.value;

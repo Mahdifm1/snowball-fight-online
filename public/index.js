@@ -85,7 +85,7 @@ function handleUserUnpublished(user) {
 //   await client.publish(Object.values(localTracks));
 // }
 
-join();
+// join();
 
 let groundMap = [[]];
 let decalMap = [[]];

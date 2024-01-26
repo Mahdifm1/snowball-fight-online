@@ -115,19 +115,20 @@ function tick(delta) {
 const chatChannel = io.of('/chat');
 
 chatChannel.on('connect', (socket) => {
-    console.log('User connected to chat channel', socket.id);
+  console.log('User connected to chat channel:', socket.id);
 
-    socket.on('chat message', (message) => {
-        console.log('Chat message received:', message);
+  socket.on('chat message', (message) => {
+    console.log('Chat message received:', message);
 
-        // Broadcast the message to all connected users
-        chatChannel.emit('chat message', message);
-    });
+    // Broadcast the message to all connected users
+    chatChannel.emit('chat message', message);
+  });
 
-    socket.on('disconnect', () => {
-        console.log('User disconnected from chat channel');
-    });
+  socket.on('disconnect', () => {
+    console.log('User disconnected from chat channel');
+  });
 });
+
 
 
 async function main() {

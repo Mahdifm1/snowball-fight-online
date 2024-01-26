@@ -32,6 +32,8 @@ sendChatButton.addEventListener('click', () => {
   const message = chatInput.value;
   if (message) {
     socket.emit('chat message', message);
+    chatBoxElement.innerHTML += `<p>${message}</p>`;
+    // console.log(message)
     chatInput.value = '';
   }
 });
@@ -98,6 +100,14 @@ const SNOWBALL_RADIUS = 5;
 
 socket.on("connect", () => {
   console.log("connected");
+
+  socket.join('/chat');
+
+  socket.on('chat message', (message) => {
+    const chatBoxElement = document.getElementById('chat-box'); // Get the chat box element
+    chatBoxElement.innerHTML += `<p>${message}</p>`; // Append the new message to the chat box
+  });
+
 });
 
 socket.on("map", (loadedMap) => {

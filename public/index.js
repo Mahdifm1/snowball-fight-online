@@ -4,8 +4,8 @@ mapImage.src = "/snowy-sheet.png";
 const santaImage = new Image();
 santaImage.src = "/santa.png";
 
-const speakerImage = new Image();
-speakerImage.src = "/speaker.png";
+// const speakerImage = new Image();
+// speakerImage.src = "/speaker.png";
 
 const walkSnow = new Audio("walk-snow.mp3");
 
@@ -197,13 +197,13 @@ function loop() {
 
   for (const player of players) {
     canvas.drawImage(santaImage, player.x - cameraX, player.y - cameraY);
-    if (!player.isMuted) {
-      canvas.drawImage(
-        speakerImage,
-        player.x - cameraX + 5,
-        player.y - cameraY - 28
-      );
-    }
+    // if (!player.isMuted) {
+    //   canvas.drawImage(
+    //     speakerImage,
+    //     player.x - cameraX + 5,
+    //     player.y - cameraY - 28
+    //   );
+    // }
 
     if (player !== myPlayer) {
       if (

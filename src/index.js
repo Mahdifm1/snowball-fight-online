@@ -140,15 +140,15 @@ async function main() {
       inputsMap[socket.id] = inputs;
     });
 
-    socket.on("mute", (isMuted) => {
-      const player = players.find((player) => player.id === socket.id);
-      player.isMuted = isMuted;
-    });
+    // socket.on("mute", (isMuted) => {
+    //   const player = players.find((player) => player.id === socket.id);
+    //   player.isMuted = isMuted;
+    // });
 
-    socket.on("voiceId", (voiceId) => {
-      const player = players.find((player) => player.id === socket.id);
-      player.voiceId = voiceId;
-    });
+    // socket.on("voiceId", (voiceId) => {
+    //   const player = players.find((player) => player.id === socket.id);
+    //   player.voiceId = voiceId;
+    // });
 
     socket.on("snowball", (angle) => {
       const player = players.find((player) => player.id === socket.id);

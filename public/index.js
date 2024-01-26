@@ -27,21 +27,8 @@ let isPlaying = true;
 const remoteUsers = {};
 window.remoteUsers = remoteUsers;
 
-const muteButton = document.getElementById("mute");
 const uid = Math.floor(Math.random() * 1000000);
 
-muteButton.addEventListener("click", () => {
-  if (isPlaying) {
-    localTracks.audioTrack.setEnabled(false);
-    muteButton.innerText = "unmute";
-    socket.emit("mute", true);
-  } else {
-    localTracks.audioTrack.setEnabled(true);
-    muteButton.innerText = "mute";
-    socket.emit("mute", false);
-  }
-  isPlaying = !isPlaying;
-});
 
 const options = {
   appid: "eee1672fa7ef4b83bc7810da003a07bb",
@@ -69,7 +56,6 @@ function handleUserUnpublished(user) {
 }
 
 async function join() {
-  socket.emit("voiceId", uid);
 
   client.on("user-published", handleUserPublished);
   client.on("user-unpublished", handleUserUnpublished);

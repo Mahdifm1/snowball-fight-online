@@ -32,7 +32,7 @@ sendChatButton.addEventListener('click', () => {
 });
 
 socket.on('chat message', (message) => {
-  chatBoxElement.innerHTML += `<p>${message}</p>`; // Append new message to the chat box
+  chatBoxElement.innerHTML = `<p>${message}</p>` + chatBoxElement.innerHTML; // Append new message to the chat box
 });
 
 

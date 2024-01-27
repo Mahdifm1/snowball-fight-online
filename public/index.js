@@ -4,9 +4,6 @@ mapImage.src = "/snowy-sheet.png";
 const santaImage = new Image();
 santaImage.src = "/santa.png";
 
-// const speakerImage = new Image();
-// speakerImage.src = "/speaker.png";
-
 const walkSnow = new Audio("walk-snow.mp3");
 
 const canvasEl = document.getElementById("canvas");
@@ -17,8 +14,6 @@ const canvas = canvasEl.getContext("2d");
 
 
 const socket = io();
-
-// const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 
 const localTracks = {
   audioTrack: null,
@@ -32,8 +27,6 @@ sendChatButton.addEventListener('click', () => {
   const message = chatInput.value;
   if (message) {
     socket.emit('chat message', message);
-    chatBoxElement.innerHTML += `<p>${message}</p>`;
-    // console.log(message)
     chatInput.value = '';
   }
 });
@@ -41,7 +34,6 @@ sendChatButton.addEventListener('click', () => {
 socket.on('chat message', (message) => {
   chatBoxElement.innerHTML += `<p>${message}</p>`; // Append new message to the chat box
 });
-
 
 
 let isPlaying = true;
@@ -59,36 +51,6 @@ const options = {
   token: null,
 };
 
-// async function subscribe(user, mediaType) {
-//   await client.subscribe(user, mediaType);
-//   if (mediaType === "audio") {
-//     user.audioTrack.play();
-//   }
-// }
-
-function handleUserPublished(user, mediaType) {
-  const id = user.uid;
-  remoteUsers[id] = user;
-  subscribe(user, mediaType);
-}
-
-function handleUserUnpublished(user) {
-  const id = user.uid;
-  delete remoteUsers[id];
-}
-
-// async function join() {
-//
-//   client.on("user-published", handleUserPublished);
-//   client.on("user-unpublished", handleUserUnpublished);
-//
-//   await client.join(options.appid, options.channel, options.token || null, uid);
-//   localTracks.audioTrack = await AgoraRTC.createMicrophoneAudioTrack();
-//
-//   await client.publish(Object.values(localTracks));
-// }
-
-// join();
 
 let groundMap = [[]];
 let decalMap = [[]];
@@ -100,14 +62,6 @@ const SNOWBALL_RADIUS = 5;
 
 socket.on("connect", () => {
   console.log("connected");
-
-  socket.join('/chat');
-
-  socket.on('chat message', (message) => {
-    const chatBoxElement = document.getElementById('chat-box'); // Get the chat box element
-    chatBoxElement.innerHTML += `<p>${message}</p>`; // Append the new message to the chat box
-  });
-
 });
 
 socket.on("map", (loadedMap) => {
@@ -227,13 +181,6 @@ function loop() {
 
   for (const player of players) {
     canvas.drawImage(santaImage, player.x - cameraX, player.y - cameraY);
-    // if (!player.isMuted) {
-    //   canvas.drawImage(
-    //     speakerImage,
-    //     player.x - cameraX + 5,
-    //     player.y - cameraY - 28
-    //   );
-    // }
 
     if (player !== myPlayer) {
       if (
